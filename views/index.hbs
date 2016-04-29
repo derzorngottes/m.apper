@@ -1,2 +1,113 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<body>
+  <div id="map-options">
+    <div class="row">
+      <div id="display" class="col-md-12">
+        <h1>Search</h1>
+        <p>Find meetups near you</p>
+        <form method="POST" action="/">
+          <fieldset class="form-group">
+            <label for="zipcode">Zipcode <small>(Required)</small></label>
+
+            <input id="zipcode" name='zipcode' class="form-control"  placeholder="12345" required>
+          </fieldset>
+          <fieldset id="categories" class="form-group">
+            <label for="categories">Categories <small>(Choose At Least One)</small></label>
+            <select multiple class="form-control" name='categories' id="categories" required="">
+              <option value="1">Arts & Culture</option>
+              <option value="18">Book Clubs</option>
+              <option value="2">Career & Business</option>
+              <option value="3">Cars & Motorcycles</option>
+              <option value="4">Community & Environment</option>
+              <option value="5">Dancing</option>
+              <option value="6">Education & Learning</option>
+              <option value="8">Fashion & Beauty</option>
+              <option value="9">Fitness</option>
+              <option value="10">Food & Drink</option>
+              <option value="11">Games</option>
+              <option value="14">Health & Wellbeing</option>
+              <option value="15">Hobbies & Crafts</option>
+              <option value="16">Language</option>
+              <option value="12">LGBT</option>
+              <option value="17">Lifestyle</option>
+              <option value="13">Government & Politics</option>
+              <option value="20">Movies & Film</option>
+              <option value="21">Music</option>
+              <option value="22">New Age Spirituality</option>
+              <option value="23">Outdoors Adventure</option>
+              <option value="24">Paranormal</option>
+              <option value="25">Parents & Family</option>
+              <option value="26">Pets & Animals</option>
+              <option value="27">Photography</option>
+              <option value="28">Religious Beliefs</option>
+              <option value="29">Sci-Fi & Fantasy</option>
+              <option value="30">Singles</option>
+              <option value="31">Socializing</option>
+              <option value="32">Sports & Recreation</option>
+              <option value="33">Support</option>
+              <option value="34">Tech</option>
+              <option value="35">Writing</option>
+            </select>
+          </fieldset>
+          <button type="submit" class="btn btn-primary submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div id='map'></div>
+    <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYXVzdGluc3ByYWd1ZSIsImEiOiJjaW44ZWxxYTQwdmIzd3pseWJqd2EyeWI1In0.TJwbshYK7dxYgnDhd87rDA';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+    {{#if lat}}
+    .setView([{{{lat}}}, {{{lon}}}], 9);
+    {{else}}
+    .setView([47.6062, -122.3321], 9);
+    {{/if}}
+
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+
+    {{#if markers}}
+    var geoJson = {{{markers}}};
+    {{else}}
+    var geoJson = [{
+      type: 'Feature',
+      "geometry": { "type": "Point", "coordinates": [-74.00, 40.71]},
+      "properties": {
+        "url": "https://en.wikipedia.org/wiki/New_York_City",
+        "marker-color": "#ff8888",
+        "city": "New York City"
+      }
+    }];
+    {{/if}}
+
+    // Add custom popups to each using our custom feature properties
+    myLayer.on('layeradd', function(e) {
+      var marker = e.layer,
+      feature = marker.feature;
+
+      // Create custom popup content
+      var popupContent =  '<a target="_blank" class="popup popupText" href="' + feature.properties.url + '">' + feature.properties.name + '</a>'
+      // + '<br>'
+      // + '<a target="_blank class="popup popupText" href="http://www.meetup.com">RSVP</a>'
+      + '<br>'
+      //+ '<p>' + feature.properties.description;
+      + '<p class="popupText"> Date: ' + feature.properties.date
+      + '<br>'
+      + '<p class="popupText"> Time: ' + feature.properties.startTime
+      + '<br>'
+      + '<p>' + feature.properties.description + '...';
+
+      // http://leafletjs.com/reference.html#popup
+      marker.bindPopup(popupContent,{
+        closeButton: true,
+        minWidth: 200,
+      });
+    });
+
+    // Add features to the map
+    myLayer.setGeoJSON(geoJson);
+
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+</body>
