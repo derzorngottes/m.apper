@@ -2,16 +2,14 @@
   <div id="map-options">
     <div class="row">
       <div id="display" class="col-md-12">
-        <h1>Search</h1>
-        <p>Find meetups near you</p>
+        <h1>Find meetups near you</h1>
         <form method="POST" action="/">
           <fieldset class="form-group">
-            <label for="zipcode">Zipcode <small>(Required)</small></label>
-
-            <input id="zipcode" name='zipcode' class="form-control"  placeholder="12345" required>
+            <label for="address">Address: <small>(required)</small></label>
+            <input id="address" name='address' class="form-control" required>
           </fieldset>
           <fieldset id="categories" class="form-group">
-            <label for="categories">Categories <small>(Choose At Least One)</small></label>
+            <label for="categories">Categories <small>(choose at least one)</small></label>
             <select multiple class="form-control" name='categories' id="categories" required="">
               <option value="1">Arts & Culture</option>
               <option value="18">Book Clubs</option>
@@ -56,58 +54,22 @@
   <div class="container">
     <div id='map'></div>
     <script>
-    L.mapbox.accessToken = 'pk.eyJ1IjoiYXVzdGluc3ByYWd1ZSIsImEiOiJjaW44ZWxxYTQwdmIzd3pseWJqd2EyeWI1In0.TJwbshYK7dxYgnDhd87rDA';
-    var map = L.mapbox.map('map', 'mapbox.streets')
-    {{#if lat}}
-    .setView([{{{lat}}}, {{{lon}}}], 9);
-    {{else}}
-    .setView([47.6062, -122.3321], 9);
-    {{/if}}
-
-    var myLayer = L.mapbox.featureLayer().addTo(map);
-
-    {{#if markers}}
-    var geoJson = {{{markers}}};
-    {{else}}
-    var geoJson = [{
-      type: 'Feature',
-      "geometry": { "type": "Point", "coordinates": [-74.00, 40.71]},
-      "properties": {
-        "url": "https://en.wikipedia.org/wiki/New_York_City",
-        "marker-color": "#ff8888",
-        "city": "New York City"
+      function initMap() {
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+          center: { lat: 44.540, lng: -78.546 },
+          zoom: 8
+        });
       }
-    }];
-    {{/if}}
-
-    // Add custom popups to each using our custom feature properties
-    myLayer.on('layeradd', function(e) {
-      var marker = e.layer,
-      feature = marker.feature;
-
-      // Create custom popup content
-      var popupContent =  '<a target="_blank" class="popup popupText" href="' + feature.properties.url + '">' + feature.properties.name + '</a>'
-      // + '<br>'
-      // + '<a target="_blank class="popup popupText" href="http://www.meetup.com">RSVP</a>'
-      + '<br>'
-      //+ '<p>' + feature.properties.description;
-      + '<p class="popupText"> Date: ' + feature.properties.date
-      + '<br>'
-      + '<p class="popupText"> Time: ' + feature.properties.startTime
-      + '<br>'
-      + '<p>' + feature.properties.description + '...';
-
-      // http://leafletjs.com/reference.html#popup
-      marker.bindPopup(popupContent,{
-        closeButton: true,
-        minWidth: 200,
-      });
-    });
-
-    // Add features to the map
-    myLayer.setGeoJSON(geoJson);
-
-  </script>
+    </script>
+    <style>
+      #map {
+        width: 100%;
+        height: 400px;
+      }
+    </style>
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+  <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCwN53tOvy26boDA1DSAj_3ivOuYxLfLG0&callback=initMap' type='text/javascript' async defer></script>
 </body>

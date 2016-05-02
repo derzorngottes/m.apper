@@ -3,7 +3,7 @@ Workflow for M.Apper
 ---
 Step 0
 ---
-Initialize Express app
+XX Initialize Express app
 =======
 --
 Thacher Notes: Added a few pieces, named the steps, added a line where I thought steps could be split and a few questions(>)
