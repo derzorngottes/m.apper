@@ -101,13 +101,12 @@
           });
 
           //redirect in order to generate GET request on backend
-          //should this be a jQuery GET request?
-
           $.get('http://localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
-            //nothing
+            //handle the request on backend
+            //then return the data as a JSON of events
+            //and geolocate those events as pins on the map
+            //easy! :)
           });
-          //or this vv ?
-          //window.location.href = 'localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long;
 
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
