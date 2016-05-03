@@ -103,10 +103,10 @@
           //redirect in order to generate GET request on backend
           //should this be a jQuery GET request?
 
-          $.get('localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
+          $.get('http://localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
             //nothing
           });
-
+          //or this vv ?
           //window.location.href = 'localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long;
 
         } else {
