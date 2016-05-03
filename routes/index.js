@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/find/:id', (req, res, next) => {
-  //console.log(req.body);
+  console.log('here!!!!');
 
   /* this route works
      the next step is to get the 'id' from the url params

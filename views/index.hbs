@@ -101,9 +101,13 @@
           });
 
           //redirect in order to generate GET request on backend
-          var getthisurl = '/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long;
-          console.log(getthisurl);
-          //window.location.href = '/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long;
+          //should this be a jQuery GET request?
+
+          $.get('localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
+            //nothing
+          });
+
+          //window.location.href = 'localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long;
 
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
