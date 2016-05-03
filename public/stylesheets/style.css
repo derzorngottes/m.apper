@@ -118,7 +118,7 @@ h3 {
   margin: 0px;
   border: 0px;
   position: absolute;
-  width: 450px;
+  width: 675px;
   z-index: 200;
 }
 
@@ -133,4 +133,14 @@ h3 {
   margin: 0px;
   padding: 0px;
   width: 225px;
+}
+
+#cat-opts li ul a {
+  display: block;
+  height: 30px;
+  font-size: 12px;
+  font-style: normal;
+  margin: 0px;
+  padding: 0px 10px 0px 15px;
+  text-align: left;
 }
