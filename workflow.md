@@ -10,11 +10,11 @@ Thacher Notes: Added a few pieces, named the steps, added a line where I thought
 ---
 Step 0 (Setup)
 ---
-Initialize Express app (express --git --hbs)
-Add knex, including migrations
-Add .env file and .gitignore
-Get API keys for Meetup and Google Maps
-Create local databases to hold tables
+XX Initialize Express app (express --git --hbs)
+XX Add knex, including migrations
+XX Add .env file and .gitignore
+XX Get API keys for Meetup and Google Maps
+XX Create local databases to hold tables
 
 ****** .env and .gitignore
 
@@ -22,8 +22,8 @@ Create local databases to hold tables
 Step 1
 ---
 Create OAuth route for user to login with Meetup OAuth
-Build index file in handlebars w/basic css layout
-Add google map
+XX Build index file in handlebars w/basic css layout
+XX Add google map
 Add user input for zipcode / pin on map
 =======
 Step 1 (OAuth and Index/Map Setup)
