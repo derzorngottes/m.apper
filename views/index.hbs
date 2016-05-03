@@ -86,9 +86,11 @@
       geocoder.geocode({'address': address}, (results, status) => {
 
         if (status == google.maps.GeocoderStatus.OK) {
+
+          //set object containing lat and long from geocode results
           var latlong = {
-            lat: results[0].geometry.viewport.H,
-            long: results[0].geometry.viewport.J
+            lat: results[0].geometry.viewport.H.H,
+            long: results[0].geometry.viewport.j.H
           };
 
           //put marker for user's address
@@ -99,7 +101,9 @@
           });
 
           //redirect in order to generate GET request on backend
-          //window.location.href = '/find/' + eventId + '?lat=' + latlong.lat + '?long=' + long;
+          var getthisurl = '/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long;
+          console.log(getthisurl);
+          //window.location.href = '/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long;
 
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
