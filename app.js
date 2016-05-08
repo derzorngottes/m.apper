@@ -3,13 +3,29 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
-var knex = require('./db/knex');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var passport = require('passport');
+var bluebird = require('bluebird');
+var helpers = require('./db/helpers');
+var queries = require('./db/queries');
+var knex = require('./db/knex');
+require('dotenv').load();
+var MeetupStrategy = require('passport-meetup-oauth2').Strategy;
 var app = express();
+
+
+passport.use(new MeetupStrategy({
+    clientID: MEETUP_KEY,
+    clientSecret: MEETUP_SECRET,
+    callbackURL: "http://localhost:3000/auth/meetup/callback"
+  }, function (accessToken, refreshToken, profile, done) {
+    // store credentials, etc
+    });
+  }
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
