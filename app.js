@@ -24,15 +24,15 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-passport.use(new MeetupStrategy({
+passport.use(new MeetupStrategy ({
     clientID: process.env.MEETUP_KEY,
     clientSecret: process.env.MEETUP_SECRET,
     callbackURL: "http://localhost:3000/auth/meetup/callback"
   }, function (accessToken, refreshToken, profile, done) {
     // store credentials, etc
     console.log(accessToken);
-  queries.addUser(accessToken);
-  process.nextTick(function() {
+    queries.addUser(accessToken);
+    process.nextTick(function() {
     return done(null, profile);
   });
 }));
