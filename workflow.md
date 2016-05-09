@@ -5,8 +5,6 @@ Step 0
 ---
 XX Initialize Express app
 =======
---
-Thacher Notes: Added a few pieces, named the steps, added a line where I thought steps could be split and a few questions(>)
 ---
 Step 0 (Setup)
 ---
@@ -21,19 +19,19 @@ XX Create local databases to hold tables
 ---
 Step 1
 ---
-Create OAuth route for user to login with Meetup OAuth
+XX Create OAuth route for user to login with Meetup OAuth
 XX Build index file in handlebars w/basic css layout
 XX Add google map
-Add user input for zipcode / pin on map
+XX Add user input for zipcode / pin on map
 =======
 Step 1 (OAuth and Index/Map Setup)
 ---
-Create OAuth route for user to login with Meetup OAuth
+XX Create OAuth route for user to login with Meetup OAuth
 
-Build index file in handlebars w/basic css layout including login button (to tie into OAuth)
+XX Build index file in handlebars w/basic css layout including login button (to tie into OAuth)
 Add user input form for zipcode (placeholders for any other information to be requested from the user)
-Add google map to index.hbs
-Generate pins on map from test data
+XX Add google map to index.hbs
+N/A Generate pins on map from test data
 
 ***** google map and user functions should be on the front end
 
@@ -42,6 +40,7 @@ Step 2
 ---
 Use user zipcode to populate events on map
 Ensure that login creates an access token in the database
+Validate that user needs to select category
 Build out marker pop-outs to include event info
 Add 'RSVP' and 'SAVE' buttons to pop-outs
 =======
@@ -72,6 +71,7 @@ Step 4
 ---
 Make markers gold if event is in < 24 hours
 Take more info from user's Meetup account and display it on their user page
+Add "Allow site to use location" so that map is set to user location when page is loaded
 Put some finesse on the css
 =======
 Step 3 (Routes and Next Step MeetUp details)
