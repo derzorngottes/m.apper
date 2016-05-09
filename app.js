@@ -9,38 +9,61 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var passport = require('passport');
 var bluebird = require('bluebird');
-var helpers = require('./db/helpers');
-var queries = require('./db/queries');
+// var helpers = require('./db/helpers');
+// var queries = require('./db/queries');
 var knex = require('./db/knex');
 require('dotenv').load();
 var MeetupStrategy = require('passport-meetup-oauth2').Strategy;
 var app = express();
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 passport.use(new MeetupStrategy({
-    clientID: MEETUP_KEY,
-    clientSecret: MEETUP_SECRET,
+    clientID: process.env.MEETUP_KEY,
+    clientSecret: process.env.MEETUP_SECRET,
     callbackURL: "http://localhost:3000/auth/meetup/callback"
   }, function (accessToken, refreshToken, profile, done) {
     // store credentials, etc
-    });
-  }
-));
+    console.log(accessToken);
+  queries.addUser(accessToken);
+  process.nextTick(function() {
+    return done(null, profile);
+  });
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cookieSession({ name: 'session', keys: [process.env.SESSION_KEY] }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.get('/auth/meetup',
+  passport.authenticate('meetup'),
+  function(req, res) {
+
+  });
+
+app.get('/auth/meetup/callback',
+  passport.authenticate('meetup', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
