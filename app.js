@@ -34,7 +34,7 @@ passport.use(new MeetupStrategy({
   queries.addUser(accessToken);
   process.nextTick(function() {
     return done(null, profile);
-  });
+  // });
 }));
 
 // view engine setup
