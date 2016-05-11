@@ -102,10 +102,17 @@
 
           //redirect in order to generate GET request on backend
           $.get('http://localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
-            //handle the request on backend
-            //then return the data as a JSON of events
-            //and geolocate those events as pins on the map
-            //easy! :)
+            /*
+              for each event in [events] {
+                var eventLatLon = { lat: event.lat, lng: event.lon };
+                var marker = new google.maps.Marker({
+                  map: resultsMap,
+                  position: [thisposition]
+                });
+                //add bubble details to pin
+                [[code]]
+              }
+            */
           });
 
         } else {

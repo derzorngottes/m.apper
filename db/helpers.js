@@ -48,3 +48,22 @@ function get_events (lat, lon, category) {
     return pins_bubbleDetails;
   });
 }
+
+function get_date_time (pinData) {
+  var data = new Date(pinData.date);
+  var hours = date.getHours();
+  var minutes = date.Minutes();
+
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getYear();
+  var fullDate = month.toString() + '/' + day.toString();
+
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  fullTime = hours + ':' + minutes + ' ' + ampm;
+
+  return ([fullDate, fullTime]);
+}
