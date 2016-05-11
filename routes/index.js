@@ -17,9 +17,12 @@ router.get('/:id/', (req, res, next) => {
   var userLon = req.query.latlong.substring((req.query.latlong.indexOf('@') + 1), req.query.latlong.length);
   var eventId = req.params.id;
 
-  var pins_bubbleDetails = helpers.get_events(userLat, userLon, eventId);
-
-  res.send(pins_bubbleDetails);
+  helpers.get_events(userLat, userLon, eventId).then(result => {
+    var pins = JSON.stringify(result[0]);
+    var bubbles = JSON.stringify(result[1]);
+    var pins_bubbles = [pins, bubbles];
+    res.send(pins_bubbles);
+  });
 });
 
 module.exports = router;

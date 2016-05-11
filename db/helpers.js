@@ -1,7 +1,8 @@
 var queries = require('./queries');
 var rp = require('request-promise');
 
-var key = process.env.MEETUP_KEY;
+//var key = process.env.MEETUP_AUTHKEY;
+var key = '4a26184452756a334d981616177a4d';
 
 // *** MEETUP API FUNCTIONS *** //
 
@@ -53,9 +54,9 @@ function get_events (lat, lon, category) {
 }
 
 function get_date_time (pinData) {
-  var data = new Date(pinData.date);
+  var date = new Date(pinData.date);
   var hours = date.getHours();
-  var minutes = date.Minutes();
+  var minutes = date.getMinutes();
 
   var ampm = hours >= 12 ? 'pm' : 'am';
   var day = date.getDate();
