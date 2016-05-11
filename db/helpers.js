@@ -1,8 +1,11 @@
 var queries = require('./queries');
 var rp = require('request-promise');
 
-//var key = process.env.MEETUP_AUTHKEY;
-var key = '4a26184452756a334d981616177a4d';
+require('dotenv').config();
+
+var key = process.env.MEETUP_AUTHKEY;
+
+console.log(key);
 
 // *** MEETUP API FUNCTIONS *** //
 
