@@ -26,7 +26,8 @@ function get_events (lat, lon, category) {
         }
 
         pins.push({
-          // google maps data goes here in pin object
+          title: pinData.name,
+          position: { lat: pinData.venue.lat, lng: pinData.venue.lon }
         });
 
         bubbleDetails.push({

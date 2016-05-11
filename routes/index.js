@@ -9,14 +9,11 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/find/:id', (req, res, next) => {
-  console.log('here!!!!');
-
-  /* this route works
-     the next step is to get the 'id' from the url params
-     and use that to look up the events with the meetup API
-  */
-
+router.get('/:id', (req, res, next) => {
+  console.log('query is ' + req.query);
+  console.log('params is ' + req.params);
+  //req. whatever - use helpers to build meetup thingy
+  //res.send([eventsArray, details])
 });
 
 module.exports = router;

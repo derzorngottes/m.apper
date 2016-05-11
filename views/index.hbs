@@ -101,13 +101,13 @@
           });
 
           //redirect in order to generate GET request on backend
-          $.get('http://localhost:3000/find/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
+          $.get('http://localhost:3000/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
             /*
               for each event in [events] {
-                var eventLatLon = { lat: event.lat, lng: event.lon };
                 var marker = new google.maps.Marker({
+                  title: title,
                   map: resultsMap,
-                  position: [thisposition]
+                  position: position
                 });
                 //add bubble details to pin
                 [[code]]
