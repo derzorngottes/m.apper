@@ -101,20 +101,21 @@
           });
 
           //redirect in order to generate GET request on backend
-          $.get('http://localhost:3000/' + eventId + '?latlong=' + latlong.lat + '-' + latlong.long, function(data) {
-            /*
-              for each event in [events] {
-                var marker = new google.maps.Marker({
-                  title: title,
-                  map: resultsMap,
-                  position: position
-                });
-                //add bubble details to pin
-                [[code]]
-              }
-            */
-          });
+          $.get('http://localhost:3000/' + eventId + '/?latlong=' + latlong.lat + '@' + latlong.long, function(data) {
+            console.log(data);
+            var markers = data[0];
+            var markersDetails = data[1];
 
+            for (var i = 0; i < markers.length; i++ ) {
+              var marker = new google.maps.Marker({
+                title: markers[i].title,
+                map: resultsMap,
+                position: markers[i].position
+              });
+              //add bubble details to pin
+              //[[code]]
+            }
+          });
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
         }

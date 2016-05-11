@@ -1,6 +1,8 @@
 var queries = require('./queries');
 var rp = require('request-promise');
 
+var key = process.env.MEETUP_KEY;
+
 // *** MEETUP API FUNCTIONS *** //
 
 function get_events (lat, lon, category) {
@@ -67,4 +69,9 @@ function get_date_time (pinData) {
   fullTime = hours + ':' + minutes + ' ' + ampm;
 
   return ([fullDate, fullTime]);
+}
+
+module.exports = {
+  get_events: get_events,
+  get_date_time: get_date_time
 }

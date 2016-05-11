@@ -1,21 +1,25 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
+var helpers = require('../db/helpers');
+var queries = require('../db/queries');
 
 var rp = require('request-promise');
 
-/* GET home page. */
+/* GET home page */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/:id', (req, res, next) => {
-  var userLat = req.query.latlong.substring(0, req.query.latlong.indexOf('-'));
-  var userLon = req.query.latlong.substring((req.query.latlong.indexOf('-') + 1), req.query.latlong.length);
+/* GET list of events and send to map */
+router.get('/:id/', (req, res, next) => {
+  var userLat = req.query.latlong.substring(0, req.query.latlong.indexOf('@'));
+  var userLon = req.query.latlong.substring((req.query.latlong.indexOf('@') + 1), req.query.latlong.length);
   var eventId = req.params.id;
-  //console.log('params is ' + req.params);
-  //req. whatever - use helpers to build meetup thingy
-  //res.send([eventsArray, details])
+
+  var pins_bubbleDetails = helpers.get_events(userLat, userLon, eventId);
+
+  res.send(pins_bubbleDetails);
 });
 
 module.exports = router;
