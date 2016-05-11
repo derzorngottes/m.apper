@@ -101,7 +101,7 @@
           });
 
           //redirect in order to generate GET request on backend
-          $.get('http://localhost:3000/' + eventId + '?lat=' + latlong.lat + '?long=' + latlong.long, function(data) {
+          $.get('http://localhost:3000/' + eventId + '?latlong=' + latlong.lat + '-' + latlong.long, function(data) {
             /*
               for each event in [events] {
                 var marker = new google.maps.Marker({

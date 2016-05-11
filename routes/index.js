@@ -10,8 +10,10 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  console.log('query is ' + req.query);
-  console.log('params is ' + req.params);
+  var userLat = req.query.latlong.substring(0, req.query.latlong.indexOf('-'));
+  var userLon = req.query.latlong.substring((req.query.latlong.indexOf('-') + 1), req.query.latlong.length);
+  var eventId = req.params.id;
+  //console.log('params is ' + req.params);
   //req. whatever - use helpers to build meetup thingy
   //res.send([eventsArray, details])
 });
